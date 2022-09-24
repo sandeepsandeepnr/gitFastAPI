@@ -29,10 +29,17 @@ class Router:
         def get_all_employee():
             return self.__employee.get_all_employees()  
 
-        @api_router.get('/employee/id/{user_id}')     
-        def get_employee(user_id:str):
-            return self.__employee.get_employee(user_id)  
+        @api_router.get('/employee/id/{id}')     
+        def get_employee(id:str):
+            return self.__employee.get_employee(id)  
 
+        @api_router.put('/UpdateEmployee')
+        def update_employee(employeemodel: EmployeeModel):
+            return self.__employee.update_employee(employeemodel)   
+
+        @api_router.delete('/employee/id/{id}')     
+        def get_employee(id:str):
+            return self.__employee.delete_employee(id)  
         @api_router.post('/analytics')
         def create_analytics(analytics:AnalyticsModel):
             return self.__analytics.create_analytics(analytics)    

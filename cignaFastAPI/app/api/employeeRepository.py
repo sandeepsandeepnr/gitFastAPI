@@ -26,29 +26,32 @@ class EmployeeRepository:
     def update_employee(self, employee: dict):
         table = self.__db.Table('employee')
         response = table.update_item(
-            Key={'uid': employee.get('uid')},
+            Key={'id': employee.get('id')},
             UpdateExpression="""
                 set
-                    name=:name,
+                    #name=:name,
                     email=:email,
                     password=:password,
-                    age=:age,
-                    address=:address
+                    age=:age
+                    
             """,
             ExpressionAttributeValues={
                 ':name': employee.get('name'),
                 ':email': employee.get('email'),
                 ':password': employee.get('password'),
-                ':age': employee.get('age'),
-                ':address': employee.get('address')
+                ':age': employee.get('age')
+                
             },
+            ExpressionAttributeNames={
+                "#name": "name"
+           },
             ReturnValues="UPDATED_NEW"
         )
         return response
 
-    def delete_employee(self, uid: str):
+    def delete_employee(self, id: str):
         table = self.__db.Table('employee')
         response = table.delete_item(
-            Key={'uid': uid}
+            Key={'id': id}
         )
         return response

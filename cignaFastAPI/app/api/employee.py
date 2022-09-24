@@ -47,8 +47,9 @@ class Employee:
             raise HTTPException(status_code=400, detail='No user found')
        
 
-    def update_employee(self):
-        return 'update employee details  '
+    def update_employee(self,employee: EmployeeModel):
+       
+        return self.__employeeRepository.update_employee(employee.dict())
 
-    def delete_employee(self):
-        return 'delete employee'
+    def delete_employee(self,id:str):
+        return self.__employeeRepository.delete_employee(id)
