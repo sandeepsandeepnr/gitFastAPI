@@ -10,7 +10,7 @@ from typing import List, Optional
 from api.employeeRepository import EmployeeRepository
 
 class EmployeeModel(BaseModel):
-    id: Optional[str] = None
+    #id: Optional[str] = None
     name: str
     email: str 
     password: str
@@ -24,10 +24,11 @@ class Employee:
 
     def create_employee(self,employee: EmployeeModel):
 
-        employee.id = str(uuid4())
-       
+        #employee.id = str(uuid4())
+        employeeDict = employee.dict()
+        employeeDict['id'] =  str(uuid4())
 
-        return self.__employeeRepository.create_employee(employee.dict())
+        return self.__employeeRepository.create_employee(employeeDict)
         # dynamo_client  =  boto3.resource(service_name = 'dynamodb',region_name = 'us-east-1',
         #       aws_access_key_id = 'AKIAZBTEZ2WJYB472WN5',
         #       aws_secret_access_key = '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')

@@ -4,7 +4,7 @@ from fastapi import HTTPException
 
 from api.authAPI import AuthAPI,Login
 from api.employee import Employee,EmployeeModel
-from api.analytics import Analytics,AnalyticsModel,UpdateAnalytics
+from api.analytics import Analytics,AnalyticsModel
 
 
 class Router:
@@ -40,13 +40,26 @@ class Router:
         @api_router.delete('/employee/id/{id}')     
         def get_employee(id:str):
             return self.__employee.delete_employee(id)  
-        @api_router.post('/analytics')
+        @api_router.post('/Analytics')
         def create_analytics(analytics:AnalyticsModel):
             return self.__analytics.create_analytics(analytics)    
 
-        @api_router.put('/analytics')
-        def update_analytics(updateAnalytics:UpdateAnalytics):
-            return self.__analytics.update_analytics()
+        @api_router.put('/updateAnalytics/id/{id}')
+        def update_analytics(id: str):
+            return self.__analytics.update_analytics(id)
+
+        @api_router.get('/AllAnalytics')
+        def get_all_analytics():
+            return self.__analytics.get_all_analytics()
+
+        @api_router.get('/Analytics/id/{id}')
+        def get_all_analytics(id:str):
+            return self.__analytics.get_all_analytics(id)   
+
+
+        @api_router.get('/Analytics/userid/{userid}')
+        def get_user_analytics(userid:str):
+            return self.__analytics.get_all_analytics(userid)           
 
 
 
