@@ -1,5 +1,6 @@
 from botocore.exceptions import ClientError
 from boto3.resources.base import ServiceResource
+from boto3.dynamodb.conditions import Key, Attr
 
 class AnalyticsRepository:
     def __init__(self, db: ServiceResource) -> None:
@@ -21,7 +22,12 @@ class AnalyticsRepository:
     def get_employee_analytics(self, userid: str):
        try:
             table = self.__db.Table('analytics')
-            response = table.get_item(Key={'userid': userid})
+            # response = table.get_item(Key={'userid': userid})
+            #result = table.query( KeyConditionExpression=(Key('userid').eq(userid)))
+            # = table.scan(FilterExpression = Attr('userid').eq(userid))
+            response =  table.query(KeyConditionExpression=Key('userid').eq(userid))
+            # response = table.query ( KeyConditionExpression=Key('userid').eq(userid))
+            response = table.query(IndexName='userid-index',KeyConditionExpression=Key('userid').eq(userid))
             return response['Item']
        except ClientError as e:
             raise ValueError(e.response['Error']['Message'])

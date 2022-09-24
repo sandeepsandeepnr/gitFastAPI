@@ -16,7 +16,7 @@ employeeRepository = EmployeeRepository(db)
 analyticsRepository = AnalyticsRepository(db)
 
 employee = Employee(employeeRepository)
-analytics = Analytics(analyticsRepository,employeeRepository)
+analytics = Analytics(analyticsRepository,employee)
 router = Router(auth_api,employee,analytics)
 
 app.include_router(router.router)

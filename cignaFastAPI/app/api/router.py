@@ -53,13 +53,13 @@ class Router:
             return self.__analytics.get_all_analytics()
 
         @api_router.get('/Analytics/id/{id}')
-        def get_all_analytics(id:str):
-            return self.__analytics.get_all_analytics(id)   
+        def get_analytics(id:str):
+            return self.__analytics.get_analytics(id)  
 
 
         @api_router.get('/Analytics/userid/{userid}')
         def get_user_analytics(userid:str):
-            return self.__analytics.get_all_analytics(userid)           
+            return self.__analytics.get_user_analytics(userid)           
 
 
 
