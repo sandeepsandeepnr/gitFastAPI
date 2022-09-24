@@ -25,13 +25,13 @@ class Router:
         def create_employee(employeemodel: EmployeeModel):
             return self.__employee.create_employee(employeemodel)
 
-        @api_router.get('/employee') 
-        def get_employee():
-            return self.__employee.get_employee()  
+        @api_router.get('/AllEmployees') 
+        def get_all_employee():
+            return self.__employee.get_all_employees()  
 
-        # @api_router.get('/all_employee')     
-        # def get_all_employee():
-        #     return self.__employee.get_all_employee()  
+        @api_router.get('/employee/id/{user_id}')     
+        def get_employee(user_id:str):
+            return self.__employee.get_employee(user_id)  
 
         @api_router.post('/analytics')
         def create_analytics(analytics:AnalyticsModel):
