@@ -5,13 +5,15 @@ from fastapi import HTTPException
 from api.authAPI import AuthAPI,Login
 from api.employee import Employee,EmployeeModel
 from api.analytics import Analytics,AnalyticsModel
+from api.employeeSerch import EmployeeSearch
 
 
 class Router:
-    def __init__(self, auth_api: AuthAPI,employee:Employee,analytics:Analytics ) -> None:
+    def __init__(self, auth_api: AuthAPI,employee:Employee,analytics:Analytics,empSearch: EmployeeSearch ) -> None:
         self.__auth_api = auth_api
         self.__employee = employee
         self.__analytics = analytics
+        self.__employeeSearch = empSearch
 
     @property
     def router(self):
@@ -59,7 +61,12 @@ class Router:
 
         @api_router.get('/Analytics/userid/{userid}')
         def get_user_analytics(userid:str):
-            return self.__analytics.get_user_analytics(userid)           
+            return self.__analytics.get_user_analytics(userid)  
+
+        @api_router.get('employee/search/{employeename}')  
+        def get_employeesearch(employeename:str):
+
+            return self.__employeeSearch.searchemp(employeename)            
 
 
 

@@ -60,8 +60,8 @@ class Analytics:
 
     def get_user_analytics(self,userid:str):
         try:
-            #userdata =    self.__employeeRepository.get_employee(userid) 
+            userdata =    self.__employee.get_employee(userid) 
             return   self.__analyticsRepository.get_employee_analytics(userid)
         except KeyError:
-            raise HTTPException(status_code=400, detail= userid)        
+            raise HTTPException(status_code=400, detail= 'no data found')        
         
